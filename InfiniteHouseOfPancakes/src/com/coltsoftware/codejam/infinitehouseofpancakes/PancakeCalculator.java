@@ -31,15 +31,17 @@ public final class PancakeCalculator {
 				getMaximumPancakes(clonedForSplitting), clonedForSplitting);
 
 		int timeIfWeEatFirst = getMinimumMinutes(clonedForEating) + 1;
-		int timeIfWeSplitFirst = getMinimumMinutes(clonedForSplitting)
-				+ splittingMinutes;
+		int timeIfWeSplitFirst = getMinimumMinutes(clonedForSplitting) + 1;
 
 		return Math.min(timeIfWeEatFirst, timeIfWeSplitFirst);
 	}
 
 	private static void reduceStacks(ArrayList<Integer> pancakes) {
-		for (int i = pancakes.size() - 1; i >= 0; i--)
-			pancakes.set(i, pancakes.get(i) - 1);
+		for (int i = pancakes.size() - 1; i >= 0; i--) {
+			Integer stackHeight = pancakes.get(i);
+			if (stackHeight > 0)
+				pancakes.set(i, stackHeight - 1);
+		}
 	}
 
 	private static int splitStack(int max, ArrayList<Integer> pancakes) {
