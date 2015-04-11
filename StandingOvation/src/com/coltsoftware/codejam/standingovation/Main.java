@@ -16,7 +16,7 @@ public final class Main {
 		System.out.println(System.getProperty("user.dir"));
 
 		List<String> readAllLines = Files.readAllLines(new File(
-				"A-small-attempt0.in").toPath(), StandardCharsets.UTF_8);
+				"A-large.in").toPath(), StandardCharsets.UTF_8);
 
 		int testCases = Integer.parseInt(readAllLines.get(0));
 
@@ -32,7 +32,7 @@ public final class Main {
 		}
 
 		OutputStream s = new FileOutputStream(new File(new File(
-				System.getProperty("user.dir")), "A-small-attempt0.out"));
+				System.getProperty("user.dir")), "A-large.out"));
 		OutputStreamWriter writer = new OutputStreamWriter(s);
 		for (String result : results)
 			writer.write(result + "\n");
