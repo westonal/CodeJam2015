@@ -44,14 +44,24 @@ public final class PancakeCalculatorTests {
 	public void my_case_5() {
 		assertEquals(7, new PancakeCalculator("8 8 5").getMinimumMinutes());
 	}
-	
+
 	@Test
 	public void my_case_6() {
 		assertEquals(7, new PancakeCalculator("6 4 4 6 7").getMinimumMinutes());
 	}
-	
+
 	@Test
 	public void my_case_8_5() {
 		assertEquals(6, new PancakeCalculator("8 5").getMinimumMinutes());
+	}
+
+	@Test
+	public void my_case_9_1_3_7() {
+		assertEquals(7, new PancakeCalculator("9 1 3 7").getMinimumMinutes());
+	}
+
+	@Test
+	public void my_case_8_6_2_1() {
+		assertEquals(6, new PancakeCalculator("8 2 6 1").getMinimumMinutes());
 	}
 }
