@@ -14,7 +14,7 @@ public final class Main {
 
 	public static void main(String[] args) throws IOException {
 		List<String> readAllLines = Files.readAllLines(new File(
-				"B-small-attempt3.in").toPath(), StandardCharsets.UTF_8);
+				"B-large.in").toPath(), StandardCharsets.UTF_8);
 
 		int testCases = Integer.parseInt(readAllLines.get(0));
 
@@ -30,7 +30,7 @@ public final class Main {
 			System.out.println(result);
 		}
 
-		OutputStream s = new FileOutputStream(new File("B-small-attempt3.out"));
+		OutputStream s = new FileOutputStream(new File("B-large.out"));
 		OutputStreamWriter writer = new OutputStreamWriter(s);
 		for (String result : results)
 			writer.write(result + "\n");
