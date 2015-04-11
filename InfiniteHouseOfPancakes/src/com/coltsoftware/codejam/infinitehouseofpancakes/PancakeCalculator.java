@@ -31,6 +31,8 @@ public final class PancakeCalculator {
 	}
 
 	public int getMinimumMinutes() {
+		int indexOfHighestStack = getHighestPancakeStack(pDinersCount);
+
 		return getMinimumMinutes(pDinersCount);
 	}
 
@@ -53,32 +55,25 @@ public final class PancakeCalculator {
 				clonedForReducedStack.length);
 		int numberOfDinersWithMaxStack = pDinersCount[indexOfHighestStack];
 
-		boolean placed = false;
-		for (int index1 = indexOfHighestStack / 2; index1 < indexOfHighestStack; index1++) {
-			// int index1 = indexOfHighestStack / 2;
+		int[] time = new int[indexOfHighestStack / 2];
+		for (int index1 = 1; index1 <= indexOfHighestStack / 2; index1++) {
 			int index2 = indexOfHighestStack - index1;
-
-			boolean wouldRemoveAZero = clonedForReducedStack[index1] == 0
-					|| clonedForReducedStack[index2] == 0;
-			if (wouldRemoveAZero)
-				continue;
-
-			clonedForReducedStack[index1] += numberOfDinersWithMaxStack;
-			clonedForReducedStack[index2] += numberOfDinersWithMaxStack;
-			placed = true;
-			break;
+			int[] clone2 = clonedForReducedStack.clone();
+			clone2[index1] += numberOfDinersWithMaxStack;
+			clone2[index2] += numberOfDinersWithMaxStack;
+			time[index1 - 1] = getMinimumMinutes(clone2);
 		}
 
-		if (!placed) {
-			int index1 = indexOfHighestStack / 2;
-			int index2 = indexOfHighestStack - index1;
-			clonedForReducedStack[index1] += numberOfDinersWithMaxStack;
-			clonedForReducedStack[index2] += numberOfDinersWithMaxStack;
-		}
-
-		int timeIfSplitFirst = getMinimumMinutes(clonedForReducedStack)
-				+ numberOfDinersWithMaxStack;
+		int timeIfSplitFirst = getMinOfArray(time) + numberOfDinersWithMaxStack;
 		return timeIfSplitFirst;
+	}
+
+	private static int getMinOfArray(int[] time) {
+		int min = Integer.MAX_VALUE;
+		for (int i = 0; i < time.length; i++)
+			if (time[i] < min)
+				min = time[i];
+		return min;
 	}
 
 	private static int getTimeIfEatNext(int[] pDinersCount) {
