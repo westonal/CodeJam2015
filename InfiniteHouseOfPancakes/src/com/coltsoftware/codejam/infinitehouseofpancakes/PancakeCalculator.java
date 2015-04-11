@@ -20,26 +20,21 @@ public final class PancakeCalculator {
 
 	private static int getMinimumMinutes(ArrayList<Integer> pancakes) {
 		int best = getMaximumPancakes(pancakes);
-		if (best <= 1)
+		if (best <= 3)
 			return best;
 
 		ArrayList<Integer> clonedForEating = new ArrayList<Integer>(pancakes);
 		reduceStacks(clonedForEating);
 		int timeIfWeEatFirst = getMinimumMinutes(clonedForEating) + 1;
 
-		if (best % 2 == 0) {
+		ArrayList<Integer> clonedForSplitting = new ArrayList<Integer>(pancakes);
+		int splittingMinutes = splitStack(
+				getMaximumPancakes(clonedForSplitting), clonedForSplitting);
 
-			ArrayList<Integer> clonedForSplitting = new ArrayList<Integer>(
-					pancakes);
-			int splittingMinutes = splitStack(
-					getMaximumPancakes(clonedForSplitting), clonedForSplitting);
+		int timeIfWeSplitFirst = getMinimumMinutes(clonedForSplitting)
+				+ splittingMinutes;
 
-			int timeIfWeSplitFirst = getMinimumMinutes(clonedForSplitting)
-					+ splittingMinutes;
-
-			return Math.min(timeIfWeEatFirst, timeIfWeSplitFirst);
-		}
-		return timeIfWeEatFirst;
+		return Math.min(timeIfWeEatFirst, timeIfWeSplitFirst);
 	}
 
 	private static void reduceStacks(ArrayList<Integer> pancakes) {
@@ -54,7 +49,7 @@ public final class PancakeCalculator {
 		int minsToSplit = 0;
 		for (int i = pancakes.size() - 1; i >= 0; i--) {
 			int p = pancakes.get(i);
-			if (p < max)
+			if (p <= max/2)
 				break;
 			pancakes.set(i, p / 2);
 			pancakes.add(p - p / 2);
