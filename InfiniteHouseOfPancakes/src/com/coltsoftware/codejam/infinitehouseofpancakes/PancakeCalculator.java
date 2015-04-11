@@ -52,8 +52,29 @@ public final class PancakeCalculator {
 		System.arraycopy(pDinersCount, 0, clonedForReducedStack, 0,
 				clonedForReducedStack.length);
 		int numberOfDinersWithMaxStack = pDinersCount[indexOfHighestStack];
-		clonedForReducedStack[indexOfHighestStack / 2] += numberOfDinersWithMaxStack;
-		clonedForReducedStack[indexOfHighestStack - (indexOfHighestStack / 2)] += numberOfDinersWithMaxStack;
+
+		boolean placed = false;
+		for (int index1 = indexOfHighestStack / 2; index1 < indexOfHighestStack; index1++) {
+			// int index1 = indexOfHighestStack / 2;
+			int index2 = indexOfHighestStack - index1;
+
+			boolean wouldRemoveAZero = clonedForReducedStack[index1] == 0
+					|| clonedForReducedStack[index2] == 0;
+			if (wouldRemoveAZero)
+				continue;
+
+			clonedForReducedStack[index1] += numberOfDinersWithMaxStack;
+			clonedForReducedStack[index2] += numberOfDinersWithMaxStack;
+			placed = true;
+			break;
+		}
+
+		if (!placed) {
+			int index1 = indexOfHighestStack / 2;
+			int index2 = indexOfHighestStack - index1;
+			clonedForReducedStack[index1] += numberOfDinersWithMaxStack;
+			clonedForReducedStack[index2] += numberOfDinersWithMaxStack;
+		}
 
 		int timeIfSplitFirst = getMinimumMinutes(clonedForReducedStack)
 				+ numberOfDinersWithMaxStack;
