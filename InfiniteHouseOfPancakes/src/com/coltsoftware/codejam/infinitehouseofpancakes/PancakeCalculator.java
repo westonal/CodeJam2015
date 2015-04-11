@@ -15,19 +15,34 @@ public final class PancakeCalculator {
 	}
 
 	public int getMinimumMinutes() {
-		int best = getMaximumPancakes();
-		int totalSplittingMinutes = 0;
-		do {
-			int splittingMinutes = splitStack(getMaximumPancakes());
-			totalSplittingMinutes += splittingMinutes;
-			int newTime = getMaximumPancakes() + totalSplittingMinutes;
-			if (newTime > best)
-				return best;
-			best = newTime;
-		} while (true);
+		return getMinimumMinutes(pancakes);
 	}
 
-	private int splitStack(int max) {
+	private static int getMinimumMinutes(ArrayList<Integer> pancakes) {
+		int best = getMaximumPancakes(pancakes);
+		if (best <= 1)
+			return best;
+
+		ArrayList<Integer> clonedForEating = new ArrayList<Integer>(pancakes);
+		reduceStacks(clonedForEating);
+
+		ArrayList<Integer> clonedForSplitting = new ArrayList<Integer>(pancakes);
+		int splittingMinutes = splitStack(
+				getMaximumPancakes(clonedForSplitting), clonedForSplitting);
+
+		int timeIfWeEatFirst = getMinimumMinutes(clonedForEating) + 1;
+		int timeIfWeSplitFirst = getMinimumMinutes(clonedForSplitting)
+				+ splittingMinutes;
+
+		return Math.min(timeIfWeEatFirst, timeIfWeSplitFirst);
+	}
+
+	private static void reduceStacks(ArrayList<Integer> pancakes) {
+		for (int i = pancakes.size() - 1; i >= 0; i--)
+			pancakes.set(i, pancakes.get(i) - 1);
+	}
+
+	private static int splitStack(int max, ArrayList<Integer> pancakes) {
 		int minsToSplit = 0;
 		for (int i = pancakes.size() - 1; i >= 0; i--) {
 			int p = pancakes.get(i);
@@ -41,7 +56,7 @@ public final class PancakeCalculator {
 		return minsToSplit;
 	}
 
-	private int getMaximumPancakes() {
+	private static int getMaximumPancakes(ArrayList<Integer> pancakes) {
 		return pancakes.get(pancakes.size() - 1);
 	}
 }
