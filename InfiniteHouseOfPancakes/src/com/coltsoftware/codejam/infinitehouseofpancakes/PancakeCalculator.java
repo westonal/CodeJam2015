@@ -31,8 +31,6 @@ public final class PancakeCalculator {
 	}
 
 	public int getMinimumMinutes() {
-		int indexOfHighestStack = getHighestPancakeStack(pDinersCount);
-
 		return getMinimumMinutes(pDinersCount);
 	}
 
