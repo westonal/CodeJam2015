@@ -4,14 +4,22 @@ public class Haircut {
 		int[] seq = new int[barberTimes.length];
 
 		int rep = sumBarberTimes(barberTimes);
+		int served = servedInMinutes(barberTimes, rep);
 
-		int vplaceInLine = ((placeInLine-1)%rep)+1;
+		int vplaceInLine = placeInLine % served;
 		for (int i = 1; i < vplaceInLine; i++) {
 			int bidx = findNextBarberIndex(seq);
 			seq[bidx] += barberTimes[bidx];
 		}
 
 		return findNextBarberIndex(seq) + 1;
+	}
+
+	private static int servedInMinutes(int[] barberTimes, int mins) {
+		int sum = 0;
+		for (int i = 0; i < barberTimes.length; i++)
+			sum += mins / barberTimes[i];
+		return sum;
 	}
 
 	private static int sumBarberTimes(int[] barberTimes) {
