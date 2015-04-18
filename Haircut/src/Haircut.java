@@ -3,10 +3,10 @@ public class Haircut {
 	public static int calcBarber(int placeInLine, int[] barberTimes) {
 		int[] seq = new int[barberTimes.length];
 
-		int rep = sumBarberTimes(barberTimes);
-		int served = servedInMinutes(barberTimes, rep);
+		int repeatMins = product(barberTimes);
+		int served = servedInMinutes(barberTimes, repeatMins);
 
-		int vplaceInLine = placeInLine % served;
+		int vplaceInLine = (placeInLine - 1) % served + 1;
 		for (int i = 1; i < vplaceInLine; i++) {
 			int bidx = findNextBarberIndex(seq);
 			seq[bidx] += barberTimes[bidx];
@@ -22,10 +22,10 @@ public class Haircut {
 		return sum;
 	}
 
-	private static int sumBarberTimes(int[] barberTimes) {
+	private static int product(int[] ints) {
 		int sum = 1;
-		for (int i = 0; i < barberTimes.length; i++)
-			sum *= barberTimes[i];
+		for (int i = 0; i < ints.length; i++)
+			sum *= ints[i];
 		return sum;
 	}
 
