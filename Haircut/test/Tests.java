@@ -38,5 +38,10 @@ public class Tests {
 	public void t7() {
 		assertEquals(1, Haircut.calcBarber(1 + 30, new int[] { 2, 3, 5 }));
 	}
+	
+	@Test
+	public void t8() {
+		assertEquals(2, Haircut.calcBarber(2, new int[] { 2, 3 }));
+	}
 
 }
