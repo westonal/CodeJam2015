@@ -20,7 +20,7 @@ public class Counter {
 			int flipped = flipDigits(icand);
 			if (flipped == icand)
 				continue;
-			if (flipped - i < 0) {
+			if (flipped < i) {
 				count.count += i - icand + 1;
 				return flipped;
 			}

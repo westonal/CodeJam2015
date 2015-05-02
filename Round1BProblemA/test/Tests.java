@@ -15,6 +15,16 @@ public class Tests {
 	}
 
 	@Test
+	public void test_20() {
+		assertEquals(20, Counter.count(20));
+	}
+
+	@Test
+	public void test_21() {
+		assertEquals(12 + 1, Counter.count(21));
+	}
+
+	@Test
 	public void test_23() {
 		assertEquals(15, Counter.count(23));
 	}
