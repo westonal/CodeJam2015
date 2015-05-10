@@ -1,5 +1,7 @@
 import java.util.HashMap;
 
+import javax.swing.text.html.HTML.Tag;
+
 public class C {
 	private final String keyboard;
 	private HashMap<String, Integer> frequencies = new HashMap<String, Integer>();
@@ -19,9 +21,10 @@ public class C {
 
 		double totalBananas = 0;
 		double chanceOfTarget = getChanceOfWord(target);
+		double chanceOfOverlap = getChanceOfWord(target.substring(overlap));
 		for (int b = 1; b <= maxBananas; b++) {
-			double chanceOfHittingB = chanceOfHittingB(b, target,
-					chanceOfTarget);
+			double chanceOfHittingB = (s - target.length() + 1)
+					* chanceOfHittingB(b, target, chanceOfTarget);
 			totalBananas += b * chanceOfHittingB;
 		}
 
@@ -45,7 +48,6 @@ public class C {
 			else
 				frequencies.put(key, integer + 1);
 		}
-
 	}
 
 	public double getChanceOfWord(String word) {
