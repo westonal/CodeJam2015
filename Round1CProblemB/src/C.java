@@ -16,11 +16,24 @@ public class C {
 			return 0;
 		overlap = shortestOverlap(target);
 		maxBananas = bestCaseForMonkey(overlap, target, s);
-		double chanceOfOverlap = getChanceOfWord(target.substring(overlap));
+
+		double totalBananas = 0;
 		double chanceOfTarget = getChanceOfWord(target);
-		double combined = chanceOfTarget
-				* Math.pow(chanceOfOverlap, maxBananas - 1);
-		return maxBananas * (1 - combined);
+		for (int b = 1; b <= maxBananas; b++) {
+			double chanceOfHittingB = chanceOfHittingB(b, target,
+					chanceOfTarget);
+			totalBananas += b * chanceOfHittingB;
+		}
+
+		// double chanceOfOverlap = getChanceOfWord(target.substring(overlap));
+		// double chanceOfTarget = getChanceOfWord(target);
+		// double combined = chanceOfTarget
+		// * Math.pow(chanceOfOverlap, maxBananas - 1);
+		return maxBananas - totalBananas / maxBananas;
+	}
+
+	private double chanceOfHittingB(int b, String target, double chanceOfTarget) {
+		return Math.pow(chanceOfTarget, b);
 	}
 
 	private void calcKeyboardFrequencies(String keyboard) {
