@@ -2,26 +2,24 @@ import java.util.HashMap;
 
 public class C {
 	private final String keyboard;
-	private final int s;
 	private HashMap<String, Integer> frequencies = new HashMap<String, Integer>();
 	private int maxBananas;
 	private int overlap;
 
-	public C(String keyboard, int s) {
+	public C(String keyboard) {
 		this.keyboard = keyboard;
-		this.s = s;
 		calcKeyboardFrequencies(keyboard);
 	}
 
-	public double chance(String target) {
+	public double chance(String target, int s) {
 		if (!containsAllChars(target, keyboard))
 			return 0;
 		overlap = shortestOverlap(target);
 		maxBananas = bestCaseForMonkey(overlap, target, s);
-		double chanceOfOverlap = getChanceOfWord(target.substring(0, overlap));
+		double chanceOfOverlap = getChanceOfWord(target.substring(overlap));
 		double chanceOfTarget = getChanceOfWord(target);
-		double combined = Math.pow(chanceOfOverlap, maxBananas - 1)
-				* chanceOfTarget;
+		double combined = chanceOfTarget
+				* Math.pow(chanceOfOverlap, maxBananas - 1);
 		return maxBananas * (1 - combined);
 	}
 

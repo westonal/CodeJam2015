@@ -63,7 +63,7 @@ public class Tests {
 
 	@Test
 	public void test_2_1() {
-		assertEquals(1, new C("AAA", 4).getChanceOfWord("AA"), 0.000001);
+		assertEquals(1, new C("AAA").getChanceOfWord("AA"), 0.000001);
 	}
 
 	@Test
@@ -92,9 +92,9 @@ public class Tests {
 	public double calc(String keyboard, String target, int s) {
 		if (!containsAllChars(target, keyboard))
 			return 0;
-		C c = new C(keyboard, s);
+		C c = new C(keyboard);
 
-		return c.chance(target);
+		return c.chance(target, s);
 	}
 
 }
