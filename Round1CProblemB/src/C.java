@@ -18,8 +18,11 @@ public class C {
 			return 0;
 		overlap = shortestOverlap(target);
 		maxBananas = bestCaseForMonkey(overlap, target, s);
+		double chanceOfOverlap = getChanceOfWord(target.substring(0, overlap));
 		double chanceOfTarget = getChanceOfWord(target);
-		return maxBananas * (1 - chanceOfTarget);
+		double combined = Math.pow(chanceOfOverlap, maxBananas - 1
+				* -chanceOfTarget);
+		return maxBananas * (1 - combined);
 	}
 
 	private void calcKeyboardFrequencies(String keyboard) {
@@ -63,7 +66,7 @@ public class C {
 			return 0;
 		return s / overlap + 1;
 	}
-	
+
 	public boolean containsAllChars(String target, String keyboard) {
 		for (int i = 0; i < target.length(); i++)
 			if (keyboard.indexOf(target.charAt(i)) == -1)
