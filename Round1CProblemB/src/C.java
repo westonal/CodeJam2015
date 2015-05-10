@@ -20,8 +20,8 @@ public class C {
 		maxBananas = bestCaseForMonkey(overlap, target, s);
 		double chanceOfOverlap = getChanceOfWord(target.substring(0, overlap));
 		double chanceOfTarget = getChanceOfWord(target);
-		double combined = Math.pow(chanceOfOverlap, maxBananas - 1
-				* -chanceOfTarget);
+		double combined = Math.pow(chanceOfOverlap, maxBananas - 1)
+				* chanceOfTarget;
 		return maxBananas * (1 - combined);
 	}
 
